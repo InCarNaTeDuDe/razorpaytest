@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script defer src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+$(document).ready(function(){
+    $('#paymentButton').click(function(e){
+        e.preventDefault();
+        
+        var options = {
+            key: 'YOUR_RAZORPAY_KEY_ID',
+            amount: 1000, // amount in paise (change accordingly)
+            currency: 'INR',
+            name: 'Your Company Name',
+            description: 'Description',
+            image: 'https://example.com/logo.png', // company logo or image
+            handler: function(response){
+                alert(response.razorpay_payment_id);
+                console.log("success",response)
+            },
+            prefill: {
+                name: 'Your Name',
+                email: 'your.email@example.com',
+                contact: '9999999999'
+            },
+            theme: {
+                color: '#F37254'
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    });
+});
+
+</script>
+</head>
+<body>
+
+<p>Razorpay test</p>
+<button id="paymentButton">Pay Now</button>
+
+
+</body>
+</html>
